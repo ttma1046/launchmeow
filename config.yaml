@@ -18,10 +18,3 @@ token:
 # AI settings
 ai:
   temperature: 0.7  # Creativity level (0.0-1.0)
-  
-# Mock data (used when API credits depleted)
-mock:
-  enabled: true
-  tweet_text: "launchmeow"
-  user: "launchmeow"
-  tweet_url: "https://x.com/launchmeow/status/2008821607930970339"

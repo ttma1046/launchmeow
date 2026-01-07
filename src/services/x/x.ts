@@ -248,23 +248,8 @@ export class XMonitor {
     // Wait for all tweets to be fetched (but not processed)
     await Promise.all(tweetPromises);
 
-    // If API credits are depleted and no tweets were processed, use mock data
     if (apiCreditsError && !processedAnyTweet) {
-      console.log('\n⚠️  Using mock data...');
-
-      const config = getConfig();
-      const mockTweet = {
-        tweetText: config.mock.tweet_text,
-        user: config.mock.user,
-        tweetUrl: config.mock.tweet_url,
-        imageUrl: undefined, // Twitter video URLs require auth - use local image for mock testing
-        isVideo: false, // Will use local image; video extraction ready for real API
-      };
-
-      console.log(`\n📨 Mock tweet from @${mockTweet.user}`);
-      console.log(`   ${mockTweet.tweetText.substring(0, 100)}...`);
-
-      await callback(mockTweet);
+      console.log('⚠️  Twitter API credits depleted');
     } else if (!processedAnyTweet) {
       console.log('📭 No latest tweets found from any target users');
     }

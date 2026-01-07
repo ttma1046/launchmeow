@@ -14,12 +14,6 @@ export interface BotConfig {
   ai: {
     temperature: number;
   };
-  mock: {
-    enabled: boolean;
-    tweet_text: string;
-    user: string;
-    tweet_url: string;
-  };
 }
 
 let cachedConfig: BotConfig | null = null;
