@@ -1,0 +1,27 @@
+# Meme Launcher Bot Configuration
+
+# Twitter/X accounts to monitor (without @ symbol)
+target_users:
+  - launchmeow
+  # - elonmusk
+  # Add more usernames here
+
+# Initial buy amounts (in native currency)
+initial_buy:
+  solana: 0.001  # SOL amount for PumpFun
+  bsc: 0.0001     # BNB amount for Flap
+
+# Token behavior
+token:
+  auto_sell_pumpfun: false  # Set to true to sell tokens immediately after creation
+  
+# AI settings
+ai:
+  temperature: 0.7  # Creativity level (0.0-1.0)
+  
+# Mock data (used when API credits depleted)
+mock:
+  enabled: true
+  tweet_text: "launchmeow"
+  user: "launchmeow"
+  tweet_url: "https://x.com/launchmeow/status/2008821607930970339"

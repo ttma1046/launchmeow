@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",            /* Changed from NodeNext */
+    "moduleResolution": "Bundler", /* This allows imports without .js */
+    "lib": ["ES2022", "DOM"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "allowImportingTsExtensions": true, /* Allows .ts if you want, or none */
+    "noEmit": true, /* We use tsx to run directly, so we don't need output files */
+    "resolveJsonModule": true /* Allow importing JSON files */
+  },
+  "include": ["src/**/*"]
+}

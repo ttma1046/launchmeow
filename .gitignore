@@ -1,0 +1,29 @@
+# --- Security (CRITICAL) ---
+.env
+.env.local
+keys/
+secrets/
+
+# --- Dependencies ---
+node_modules
+pnpm-lock.yaml
+# Keep lock files (package-lock.json / pnpm-lock.yaml) if you want consistent installs,
+# but usually in solo "vibe coding" projects, some people ignore them. 
+# For safety, standard practice is to KEEP the lock file, but ignore node_modules.
+
+# --- Build Output ---
+dist/
+build/
+out/
+
+# --- Logs & Debug ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# --- System Files (Mac/Windows) ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
