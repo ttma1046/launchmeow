@@ -2,7 +2,7 @@
 
 ## ✅ What Was Added
 
-### 1. **pump.fun Service** ([src/services/pumpfun.ts](src/services/pumpfun.ts))
+### 1. **pump.fun Service** ([src/services/pumpfun/pumpfun.ts](src/services/pumpfun/pumpfun.ts))
    - Full integration with pump.fun SDK
    - Token creation with bonding curve
    - Buy/sell functionality
@@ -16,7 +16,7 @@
    - `bs58@6.0.0` - Base58 encoding for private keys
 
 ### 3. **Updated Files**
-   - [src/index.ts](src/index.ts) - Added pump.fun launch flow
+   - [src/main.ts](src/main.ts) - Added pump.fun launch flow
    - [src/config/env.ts](src/config/env.ts) - Already had Solana config
    - [package.json](package.json) - Added wallet script command
 
@@ -66,13 +66,12 @@ The bot now:
 3. 🎨 Uploads images to IPFS (if configured)
 4. 🚀 **Launches on pump.fun (Solana)** ← NEW!
 5. 🌐 Launches on Flap (BSC) with bonding curve
-6. 📤 Submits to listing platforms
 
 ## 📊 Cost Analysis
 
 Per token launch on pump.fun:
 - Transaction fee: ~0.00001 SOL
-- Initial buy: 0.0001 SOL (customizable, minimal for testing)
+- Initial buy: 0.001 SOL (customizable, minimal for testing)
 - pump.fun fee: ~1% of buy
 - Priority fee: ~0.012 SOL (400k compute units @ 300k lamports/unit)
 - **Total: ~0.012 SOL per token**
@@ -83,14 +82,14 @@ With 0.5 SOL, you can launch approximately **41 tokens**.
 
 ### Change Initial Buy Amount
 
-Edit [src/services/pumpfun.ts](src/services/pumpfun.ts):
+Edit [src/services/pumpfun/pumpfun.ts](src/services/pumpfun/pumpfun.ts):
 ```typescript
-BigInt(Math.floor(0.0001 * LAMPORTS_PER_SOL)), // Change from 0.0001 to desired amount
+BigInt(Math.floor(0.001 * LAMPORTS_PER_SOL)), // Change from 0.001 to desired amount
 ```
 
 ### Adjust Slippage
 
-Edit [src/services/pumpfun.ts](src/services/pumpfun.ts):
+Edit [src/services/pumpfun/pumpfun.ts](src/services/pumpfun/pumpfun.ts):
 ```typescript
 1000n, // 10% slippage (1000 basis points) - increase if needed
 ```
@@ -103,7 +102,7 @@ The bot now uses Flap for BSC launches with bonding curve functionality similar 
 
 ### pump.fun Service
 - ✅ Automatic token creation with bonding curve
-- ✅ Initial buy to kickstart trading (minimal 0.0001 SOL)
+- ✅ Initial buy to kickstart trading (minimal 0.001 SOL)
 - ✅ Buy/sell token methods
 - ✅ Balance checking
 - ✅ Support for local image files (SDK handles IPFS internally)
@@ -157,7 +156,7 @@ pnpm tsc --noEmit
 2. **Gas Fees**: Ensure sufficient SOL for transaction fees (~0.012 SOL per token)
 3. **Image Format**: SDK handles IPFS upload - just provide local file path
 4. **Slippage**: Use higher slippage (10%) to prevent "TooMuchSolRequired" errors
-5. **Buy Amount**: Use minimal buy (0.0001 SOL) to reduce costs
+5. **Buy Amount**: Use minimal buy (0.001 SOL) to reduce costs
 6. **Security**: Never commit .env file or private keys
 7. **TypeScript**: Transaction signing handles both Transaction and VersionedTransaction types
 

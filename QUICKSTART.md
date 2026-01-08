@@ -29,7 +29,7 @@ solana balance YOUR_PUBLIC_KEY
 You can buy SOL on:
 - Coinbase
 - Binance
-- FTX
+- Kraken
 - Or any major exchange
 
 ## 3. Configure .env
@@ -74,7 +74,7 @@ The bot will:
 3. 🤖 Generate token metadata with AI
 4. 🎨 Upload image to IPFS
 5. 🚀 Launch token on pump.fun
-6. 💰 Make initial 0.01 SOL buy
+6. 💰 Make initial 0.001 SOL buy
 
 ## Expected Output
 
@@ -103,30 +103,23 @@ The bot will:
 
 ### Change Initial Buy Amount
 
-Edit [src/services/pumpfun.ts](src/services/pumpfun.ts):
+Edit `config.yaml`:
 
-```typescript
-const result = await this.sdk.createAndBuy(
-  this.wallet,
-  metadata,
-  BigInt(0.05 * 1e9), // Change to 0.05 SOL
-  BigInt(0.1 * 1e9),
-  // ...
-);
-```
-
-### Launch Only on Solana (Skip BSC)
-
-The bot now uses Flap for BSC launches which provides bonding curve functionality similar to pump.fun. No additional configuration needed.
-  name: token.name,
-  // ...
-});
-*/
+```yaml
+initial_buy:
+  solana: 0.005  # Change SOL amount for pump.fun
+  bsc: 0.001     # Change BNB amount for Flap
 ```
 
 ### Monitor Different Twitter Accounts
 
-Edit [src/services/x.ts](src/services/x.ts) to change the monitored accounts.
+Edit `config.yaml` to change the monitored accounts:
+
+```yaml
+target_users:
+  - elonmusk
+  - cz_binance
+```
 
 ## Troubleshooting
 
@@ -159,7 +152,7 @@ solana balance YOUR_PUBLIC_KEY
 
 **Issue**: Network congestion or slippage too low
 
-**Solution**: Edit [src/services/pumpfun.ts](src/services/pumpfun.ts) to increase slippage:
+**Solution**: Edit [src/services/pumpfun/pumpfun.ts](src/services/pumpfun/pumpfun.ts) to increase slippage:
 
 ```typescript
 BigInt(0.3 * 1e9), // Increase slippage to 0.3 SOL
@@ -169,11 +162,11 @@ BigInt(0.3 * 1e9), // Increase slippage to 0.3 SOL
 
 Per token launch:
 - **Transaction Fee**: ~0.00001 SOL
-- **Initial Buy**: 0.01 SOL (customizable)
+- **Initial Buy**: 0.001 SOL (customizable in config.yaml)
 - **pump.fun Fee**: ~1% of buy
-- **Total**: ~0.011 SOL per launch
+- **Total**: ~0.002 SOL per launch
 
-With 0.5 SOL you can launch ~45 tokens.
+With 0.5 SOL you can launch ~250 tokens.
 
 ## Next Steps
 

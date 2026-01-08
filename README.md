@@ -17,7 +17,6 @@ A bot that monitors X for meme-worthy content and automatically launches tokens 
 - 🚀 **Multi-Chain Launching**:
   - **pump.fun** (Solana) - Fair launch bonding curve
   - **Flap** (BSC) - Bonding curve with auto-migration to DEX
-- 📤 **Auto-Submission**: Submits to token listing platforms
 
 ## Prerequisites
 
@@ -86,18 +85,30 @@ cp .env.example .env
    SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
    ```
 
+#### BSC Wallet Setup (Flap)
+
+1. **Export Private Key from MetaMask** (or create new wallet):
+   - MetaMask → Account → Export Private Key
+   - Must include `0x` prefix
+
+2. **Fund Your Wallet**:
+   - Send BNB to your wallet address
+   - Minimum: ~0.1 BNB (for transaction fees + initial buy)
+
+3. **Add to .env**:
+   ```
+   BSC_PRIVATE_KEY_HEX=0xyour_private_key_with_0x_prefix
+   BSC_RPC_URL=https://bsc-dataseed1.binance.org
+   ```
+
 #### X (Twitter) API Setup
 
 1. Create an X Developer account at [developer.x.com](https://developer.x.com)
 2. Create a new app with Read permissions
-3. Generate API keys and tokens
+3. Generate a Bearer Token
 4. Add to `.env`:
    ```
-   X_APIKEY=...
-   X_APIKEY_SECRET=...
-   X_BEARER_TOKEN=...
-   X_ACCESS_TOKEN=...
-   X_ACCESS_TOKEN_SECRET=...
+   X_BEARER_TOKEN=your_bearer_token
    ```
 
 #### AI Service Setup
@@ -139,7 +150,7 @@ pnpm start
 1. **Monitor**: Bot checks X for new posts from configured accounts
 2. **Analyze**: AI generates token name, symbol, and description
 3. **Launch**: Creates token on pump.fun or Flap with bonding curve
-4. **Initial Buy**: Bot buys 0.01 SOL worth to kickstart the curve
+4. **Initial Buy**: Bot buys 0.001 SOL worth to kickstart the curve
 5. **Publish**: Shares contract address and links
 
 ## pump.fun Details
@@ -148,7 +159,7 @@ pnpm start
 - **No Presale**: Equal opportunity for all buyers
 - **Graduated Liquidity**: When bonding curve completes, liquidity moves to Raydium
 - **Transaction Fee**: pump.fun charges ~1% fee
-- **Initial Buy**: Bot automatically buys 0.01 SOL worth to start
+- **Initial Buy**: Bot automatically buys 0.001 SOL worth to start
 
 ## Development
 
@@ -168,11 +179,23 @@ pnpm format
 
 ## Configuration
 
-Edit [config.yaml](config.yaml) and [src/main.ts](src/main.ts) to:
-- Change monitored X accounts
-- Adjust initial buy amount (default: 0.01 SOL)
-- Toggle BSC vs Solana launches
-- Customize token metadata generation
+Edit [config.yaml](config.yaml) to configure:
+
+```yaml
+# Twitter accounts to monitor (without @)
+target_users:
+  - elonmusk
+  - cz_binance
+
+# Initial buy amounts
+initial_buy:
+  solana: 0.001  # SOL for pump.fun
+  bsc: 0.0001    # BNB for Flap
+
+# AI settings
+ai:
+  temperature: 0.7  # Creativity (0.0-1.0)
+```
 
 ## Security
 
@@ -193,7 +216,7 @@ Edit [config.yaml](config.yaml) and [src/main.ts](src/main.ts) to:
 - Check balance: `solana balance <address>`
 
 ### "Transaction failed"
-- Increase slippage tolerance in [src/services/pumpfun.ts](src/services/pumpfun.ts)
+- Increase slippage tolerance in [src/services/pumpfun/pumpfun.ts](src/services/pumpfun/pumpfun.ts)
 - Check Solana network status
 - Verify RPC endpoint is responsive
 

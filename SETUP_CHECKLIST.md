@@ -32,13 +32,9 @@ Use this checklist to ensure everything is configured correctly before launching
 ## 🐦 Twitter API Setup
 
 - [ ] Create Twitter Developer account
-- [ ] Generate API keys (v2 with OAuth 1.0a)
-- [ ] Add all Twitter keys to `.env`:
-  - `X_APIKEY`
-  - `X_APIKEY_SECRET`
+- [ ] Generate Bearer Token (v2 API)
+- [ ] Add to `.env`:
   - `X_BEARER_TOKEN`
-  - `X_ACCESS_TOKEN`
-  - `X_ACCESS_TOKEN_SECRET`
 - [ ] Test connection: Check console logs on startup
 
 ## 🤖 AI Service Setup
@@ -79,10 +75,10 @@ Use this checklist to ensure everything is configured correctly before launching
 
 ## 🎯 Pre-Launch Verification
 
-- [ ] Review bot logic in `src/index.ts`
+- [ ] Review bot logic in `src/main.ts`
 - [ ] Confirm Twitter accounts to monitor
-- [ ] Check initial buy amount (default: 0.01 SOL)
-- [ ] Verify slippage settings (default: 1%)
+- [ ] Check initial buy amount in `config.yaml` (default: 0.001 SOL)
+- [ ] Verify slippage settings (default: 10%)
 - [ ] Test on devnet first (optional but recommended)
 
 ## 🚀 Launch Readiness
@@ -108,11 +104,11 @@ Run the bot with `pnpm start` and verify:
 
 Estimated costs per token launch:
 - Solana transaction fees: ~0.00001 SOL
-- Initial buy on pump.fun: 0.01 SOL (configurable)
+- Initial buy on pump.fun: 0.001 SOL (configurable in `config.yaml`)
 - pump.fun platform fee: ~1% of buy
-- **Total per token: ~0.011 SOL**
+- **Total per token: ~0.002 SOL**
 
-With 0.5 SOL, you can launch approximately 45 tokens.
+With 0.5 SOL, you can launch approximately 250 tokens.
 
 Budget accordingly:
 - [ ] Calculated expected launch volume
@@ -130,7 +126,6 @@ Budget accordingly:
 ## 📝 Optional Enhancements
 
 - [ ] Configure Flap (BSC) for dual-chain launches
-- [ ] Set up submission to listing platforms
 - [ ] Add custom token metadata logic
 - [ ] Implement profit-taking strategies
 - [ ] Set up monitoring/alerts

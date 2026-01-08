@@ -92,11 +92,11 @@ event FlapTokenStaged(
 ## Implementation Changes
 
 ### Files Created
-- `src/services/flap.ts` - Flap service implementation
-- `src/services/flap-abi.json` - Full Flap contract ABI (74KB)
+- `src/services/flap/flap.ts` - Flap service implementation
+- `src/services/flap/flap-abi.json` - Full Flap contract ABI (74KB)
 
 ### Files Modified
-- `src/index.ts`:
+- `src/main.ts`:
   - Replaced `BSCService` with `FlapService`
   - Updated deployment logic to use Flap's bonding curve
   - Auto-sell works immediately after token creation
@@ -113,7 +113,7 @@ event FlapTokenStaged(
    - BSC via flap.sh (with bonding curve)
 4. **Auto-Sell**:
    - Solana: Sell via pump.fun bonding curve ✅
-   - BSC: Sell via Flap bonding curve ✅ (NEW!)
+   - BSC: ⚠️ Flap has disabled the sell() function - users must sell through Flap's website
 
 ## Testing
 
@@ -126,7 +126,7 @@ Expected output:
 - Token created on Flap (BSC)
 - Token address logged
 - BSCScan link provided
-- Auto-sell completes successfully
+- Flap link provided for manual selling
 
 ## Future Enhancements
 
@@ -141,7 +141,7 @@ Expected output:
 - Flap Documentation: https://docs.flap.sh/flap/developers
 - Flap App: https://flap.sh
 - BSC Explorer: https://bscscan.com
-- Contract ABI: Available in `src/services/flap-abi.json`
+- Contract ABI: Available in `src/services/flap/flap-abi.json`
 
 ## Notes
 
