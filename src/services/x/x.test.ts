@@ -180,7 +180,7 @@ describe('XMonitor', () => {
       expect(callback).not.toHaveBeenCalled();
     });
 
-    it('should handle API credits depleted with mock data', async () => {
+    it('should handle API credits depleted gracefully', async () => {
       // Arrange
       const callback = vi.fn().mockResolvedValue(undefined);
 
@@ -196,13 +196,8 @@ describe('XMonitor', () => {
       // Act
       await xMonitor.startMonitoring(callback);
 
-      // Assert - Should use mock data
-      expect(callback).toHaveBeenCalledWith(
-        expect.objectContaining({
-          user: 'cz_binance',
-          tweetText: expect.stringContaining('Got recognized'),
-        })
-      );
+      // Assert - Should not call callback when credits depleted
+      expect(callback).not.toHaveBeenCalled();
     });
 
     it('should process callbacks independently', async () => {
