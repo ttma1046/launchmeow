@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(ls:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\ndocs: fix inaccuracies and add CLAUDE.md\n\n- Add CLAUDE.md for Claude Code guidance\n- Fix initial buy amounts \\(0.01 -> 0.001 SOL\\)\n- Correct file paths \\(src/services/pumpfun.ts -> src/services/pumpfun/pumpfun.ts\\)\n- Simplify X API setup to only require bearer token\n- Add BSC wallet setup section to README\n- Remove non-existent \"Auto-Submission\" feature references\n- Update config.yaml documentation with actual YAML example\n- Fix cost calculations \\(250 tokens with 0.5 SOL, not 45\\)\n- Note Flap sell\\(\\) function is disabled\n- Replace defunct FTX with Kraken in exchange list\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "WebSearch",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}
